@@ -1,0 +1,80 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.python-version
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Node.js / TypeScript
+node_modules/
+*.tsbuildinfo
+.npm/
+npm-debug.log*
+
+# Go
+/examples/**/go/bin/
+
+# Java / Kotlin
+target/
+.gradle/
+*.class
+
+# .NET
+bin/
+obj/
+
+# Rust
+/examples/**/rust/target/
+
+# 언어 공통 빌드 결과물
+build/
+dist/
+out/
+
+# 비밀 정보와 개인 MCP 클라이언트 설정
+.env
+.env.*
+!.env.example
+.mcp.json
+*.pem
+*.key
+
+# 예제를 실행하면 생기는 사건 데이터와 호출 기록
+# 테스트용 합성 증거는 fixtures/에 두고 커밋한다
+cases/
+output/
+*.audit.jsonl
+*.log
+
+# 실제 증거 이미지와 메모리 덤프는 커밋하지 않는다
+*.E01
+*.Ex01
+*.e01
+*.dd
+*.raw
+*.img
+*.vmdk
+*.vhd
+*.vhdx
+*.mem
+*.dmp
+*.aff4
+
+# 편집기·OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 작업용 git worktree
+.claude/worktrees/
+
+# 합성 테스트 데이터는 위 패턴에 걸려도 커밋한다
+!fixtures/
+!fixtures/**
