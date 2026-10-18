@@ -379,13 +379,13 @@ public class CamelMCPTools : Runtime
             // Include anything written via log()/error() before the failure for context.
             if (output.Length > 0)
             {
-                message = PromptInjectionDefense.ApplyBoundary(output.ToString()) + Environment.NewLine + message;
+                message = output.ToString() + Environment.NewLine + message;
             }
 
             return new CallToolResult
             {
                 IsError = true,
-                Content = [new TextContentBlock { Text = message }, ExecutionBlock(executionId, session.CaseId)],
+                Content = [new TextContentBlock { Text = PromptInjectionDefense.ApplyBoundary(message) }, ExecutionBlock(executionId, session.CaseId)],
             };
         }
         finally
