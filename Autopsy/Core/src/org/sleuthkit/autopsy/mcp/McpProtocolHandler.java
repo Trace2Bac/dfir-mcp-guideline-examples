@@ -129,8 +129,15 @@ class McpProtocolHandler {
         String status;
         try {
             if (tool.isBlank() || !args.isObject()) throw new McpException("Tool name and object arguments are required");
-            call.evidence(qs == null ? Map.of("status", "not_applicable", "reason", "no_case")
-                    : qs.auditEvidence(tool, args));
+            Map<String, Object> evidence = qs == null
+                    ? Map.of("status", "not_applicable", "reason", "no_case")
+                    : qs.auditEvidence(tool, args);
+            call.evidence(evidence);
+            if (qs != null && "get_file_content".equals(tool)
+                    && args.path("objectId").asLong(-1) >= 0
+                    && !"available".equals(evidence.get("status"))) {
+                throw new McpException("Evidence hash unavailable; file content was not read");
+            }
             responseJson = buildSuccess(id, dispatchToolCall(params, qs));
             status = "completed";
         } catch (McpException ex) {
